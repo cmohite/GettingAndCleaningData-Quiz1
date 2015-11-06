@@ -1,0 +1,18 @@
+## Load xml package
+library(XML)
+
+## File URL 
+fileUrl <- "https://d396qusza40orc.cloudfront.net/getdata%2Fdata%2Frestaurants.xml"
+
+## Download File
+download.file(fileUrl, destfile="./FDATAREST.xml", mode="wb")
+
+## Read data from .xml to memory
+doc <- xmlTreeParse(file="./FDATAREST.xml", useInternal=TRUE)
+dateDownloaded <- date()
+
+## Fetch root
+rootNode <- xmlRoot(doc)
+
+## Get count of restaurants with given zip code
+sum(xpathSApply(rootNode, "//zipcode", xmlValue) == "21231")
