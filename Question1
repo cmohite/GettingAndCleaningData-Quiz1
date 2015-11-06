@@ -1,0 +1,15 @@
+## File URL
+fileUrl <- "https://d396qusza40orc.cloudfront.net/getdata%2Fdata%2Fss06hid.csv"
+
+## Download File 
+download.file(fileUrl, destfile="./housingstateofidaho.csv")
+dateDownloaded <- date()
+
+## Read CSV data into memory
+data <- read.csv("./housingstateofidaho.csv")
+
+## Subset data to select only observations where VAL >=24 
+data1 <- data[data$VAL>=24, ]
+
+## Sum/Count of observations where data1$VAL is not NA
+sum(!is.na(data1$VAL))
